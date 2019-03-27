@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <title>RTMViewer</title>
+    </head>
+    <body style="background-image: url('wind.jpg');background-size: cover">
+        <div class="container"> 
+            <h1>WP</h1>  
+            <table id="rtmdata" class="table table-dark table-hover">
+            </table>
+        </div>
+        <script>
+            windparks = [
+                {name:"Българево",      url:'http://46.55.211.226:8732/ServiceDoWork/DoWork?_=1553674569477'},
+                {name:"Евклипс",        url:'http://82.137.74.235:8732/ServiceDoWork/DoWork?_=1553674569477'},
+                {name:"Зевс Бонус",     url:'http://84.43.190.175:8732/ServiceDoWork/DoWork?_=1553674569477'},
+                {name:"Цид Атлас",      url:'http://46.55.240.17:8732/ServiceDoWork/DoWork?_=1553674569477'},  
+                {name:"Хаос",           url:'http://178.16.129.188:8732/ServiceDoWork/DoWork?_=1553674569477'},        
+                {name:"Микон 1,2,3",    url:'http://79.100.160.168:8732/ServiceDoWork/DoWork?_=1553689027886'}, 
+                {name:"Милениум",       url:'http://217.79.95.253:8732/ServiceDoWork/DoWork?_=1553674569477'}, 
+                {name:"Еко Енерджи",    url:'http://46.252.51.133:8732/ServiceDoWork/DoWork?_=1553674569477'}, 
+                {name:"Арко",           url:'http://46.55.211.156:8732/ServiceDoWork/DoWork?_=1553674569477'}, 
+                {name:"ЛонгМан",        url:'http://46.55.211.214:8732/ServiceDoWork/DoWork?_=1553674569477'},
+                {name:"ЛонгЕм",         url:'http://79.100.161.99:8732/ServiceDoWork/DoWork?_=1553674569477'},
+                {name:"Ник Билдинг",    url:'http://46.55.211.169:54313/GetValues.php?_=1553693437987'},
+                {name:"Сити Д",         url:'http://46.55.211.169:54312/GetValues.php?_=1553693672405'},   
+                {name:"Видно",          url:'http://46.55.214.50:8732/ServiceDoWork/DoWork?_=1553674569477'},
+                {name:"Каварна1",       url:'http://46.55.211.214:54312/GetValues.php?_=1553694545191'},  
+                //{name:"Храброво",       url:'212.5.144.3:8732/ServiceDoWork/DoWork?_=1553674569477'},       
+                //{name:"Каварна Ийст",   url:'http://46.55.211.214:8732/ServiceDoWork/DoWork?_=1553674569477'},
+            ]
+//Fetch the data for a question which the REST API provides
+            function fetchData(url,position,name){
+                // Fetch data from the url
+                fetch(url).then(response => {
+                    return response.json();
+                }).then(data => {
+                    // Work with JSON data here
+                    let powerrow = document.getElementById(position);
+                    let powername = document.getElementById(position+100);
+                    let powerdata = document.getElementById(position+1000);
+                    //let powerphasea = document.getElementById(position+2000);
+                    //let powerphaseb = document.getElementById(position+3000);
+                    //let powerphasec = document.getElementById(position+4000);
+                    powername.innerHTML = (position+1)+". " +name+": ";
+                    powerdata.innerHTML = (data["12"]/1000).toFixed(3) + "KW";
+                    if(data['12']<=0){
+                        powerrow.className = "table-warning";
+                        powername.className = "alert-warning";
+                        powerdata.className = "alert-warning";
+                    }else{
+                        powerrow.className = "table-success";    
+                        powername.className = "alert-success";
+                        powerdata.className = "alert-success";
+                    }
+                    
+                }).catch(err => {
+                    let powerrow = document.getElementById(position);
+                    let powername = document.getElementById(position+100);
+                    let powerdata = document.getElementById(position+1000);
+                    //let powerphasea = document.getElementById(position+2000);
+                    //let powerphaseb = document.getElementById(position+3000);
+                    //let powerphasec = document.getElementById(position+4000);
+                    powername.innerHTML = (position+1)+". " +name+": ";
+                    powerdata.innerHTML = "No Data!";
+                    powerrow.className = "table-danger";
+                    powername.className = "alert-danger";
+                    powerdata.className = "alert-danger";
+                    // Do something for an error here
+                });
+            }
+
+            function createTable(){
+                table = document.getElementById("rtmdata");
+
+                for(i=0;i<windparks.length;i++){
+                    let newline = document.createElement("tr");
+                    let namecell = document.createElement("td");
+                    let datacell = document.createElement("td");
+                   // let phaseacell = document.createElement("td");
+                    //let phasebcell = document.createElement("td");
+                    //let phaseccell = document.createElement("td");
+                    newline.id = i;
+                    namecell.id = i+100;
+                    datacell.id = i+1000;
+                    newline.appendChild(namecell);
+                    newline.appendChild(datacell);
+                    table.appendChild(newline);
+                } 
+
+            }
+
+            function getAllRTM(){
+                for(i=0;i<windparks.length;i++){
+                    let name = windparks[i]["name"];
+                    let url = windparks[i]["url"];
+                    fetchData(url,i,name);
+                }
+
+            } 
+            //getRTM();
+            createTable();
+            setInterval(getAllRTM, 500)
+            //getAllRTM();
+        </script>
+    </body>
+</html>
