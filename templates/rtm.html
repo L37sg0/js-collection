@@ -35,7 +35,7 @@
                 {name:["Каварна KAV08+KAV09","Каварна KAV10+KAV11",],      url:'http://46.55.211.214:8732/ServiceDoWork/DoWork?_=1553764022443'},       
                 {name:["Гимназия KAV12+KAV13","Гимназия KAV14+KAV15"],       url:'http://46.55.211.214:8734/ServiceDoWork/DoWork?_=1553764022443'},    
                 {name:["Божурец KAV16",],      url:'http://46.55.211.214:8735/ServiceDoWork/DoWork?_=1553764022443'},    
-                //{name:"Храброво",       url:'http://212.5.144.3:8734/ServiceDoWork/DoWork?_=1553674569477'},
+                {name:["Храброво",],       url:'ws://212.5.144.3:8732'},
             ]
             var datacells = [
                 ['12','13','14','6','7','8'],
@@ -56,66 +56,15 @@
                     let powerrow = document.getElementById(position);
                     let powername = document.getElementById(position+100);
                     for(n=0;n<datacells.length;n++){
-                        let cell_a = datacells[n][0];
-                        let cell_r = datacells[n][1];
-                        let cell_s = datacells[n][2];
-                        let cell_uab = datacells[n][3];
-                        let cell_ubc = datacells[n][4];
-                        let cell_uac = datacells[n][5];
-                        if(data[cell_a]){
-                            let active = document.getElementById(position+n*100+1000);
-                            active.innerHTML ="P"+(n+1)+" = " + Math.floor(data[cell_a]/1000) + " kW" ;
-                            if(data[cell_a]<=0){
-                                active.className = "alert-warning";
-                            }else{
-                                active.className = "alert-success";
-                            }
-                        }
-                        if(data[cell_r]){
-                            let reactive = document.getElementById(position+n*100+2000);
-                            reactive.innerHTML ="Q"+(n+1)+" = " + Math.floor(data[cell_r]/1000) + " kVar" ;
-                            if((data[cell_r]/1000)>200){
-                                reactive.className = "alert-danger";
-                            }else{
-                                reactive.className = "alert-success";
-                            }
-                        }
-                        if(data[cell_s]){
-                            let cosphy = document.getElementById(position+n*100+3000);
-                            cosphy.innerHTML ="phy"+(n+1)+" = " + Math.abs(data[cell_a]/data[cell_s]).toFixed(1);
-                            if((data[cell_a]/data[cell_s])<0.5){
-                                cosphy.className = "alert-danger";
-                            }else{
-                                cosphy.className = "alert-info";
-                            }
-                        }
-                        if(data[cell_uab]){
-                            let uab = document.getElementById(position+n*100+4000);
-                            uab.innerHTML ="Uab"+(n+1)+" = " + Math.floor(data[cell_uab]) + " V" ;
-                            if(data[cell_uab]<=20000){
-                                uab.className = "alert-danger";
-                            }else{
-                                uab.className = "alert-success";
-                            }
-                        }
-                        if(data[cell_ubc]){
-                            let ubc = document.getElementById(position+n*100+5000);
-                            ubc.innerHTML ="Ubc"+(n+1)+" = " + Math.floor(data[cell_ubc]) + " V" ;
-                            if(data[cell_ubc]<=20000){
-                                ubc.className = "alert-danger";
-                            }else{
-                                ubc.className = "alert-success";
-                            }
-                        }
-                        if(data[cell_uac]){
-                            let uac = document.getElementById(position+n*100+6000);
-                            uac.innerHTML ="Uac"+(n+1)+" = " + Math.floor(data[cell_uac]) + " V" ;
-                            if(data[cell_uac]<=20000){
-                                uac.className = "alert-danger";
-                            }else{
-                                uac.className = "alert-success";
-                            }
-                        }
+                        let cell_a = data[datacells[n][0]];
+                        let cell_r = data[datacells[n][1]];
+                        let cell_s = data[datacells[n][2]];
+                        let cell_uab = data[datacells[n][3]];
+                        let cell_ubc = data[datacells[n][4]];
+                        let cell_uac = data[datacells[n][5]];
+
+                        writeData(position,cell_a,cell_r,cell_s,cell_uab,cell_ubc,cell_uac);
+                        
                     }
                     powerrow.className = "table-success";    
                     powername.className = "alert-success";
@@ -136,6 +85,65 @@
             }
             function Reload(){
                 location.reload();
+            }
+
+            function writeData(position,cell_a,cell_r,cell_s,cell_uab,cell_ubc,cell_uac){
+
+                //console.log(cell_a,cell_r, cell_s,cell_uab,cell_uac,cell_ubc);
+                if(cell_a){
+                    let active = document.getElementById(position+n*100+1000);
+                    active.innerHTML ="P"+(n+1)+" = " + Math.floor(cell_a/1000) + " kW" ;
+                    if(cell_a<=0){
+                        active.className = "alert-warning";
+                    }else{
+                        active.className = "alert-success";
+                    }
+                }
+                if(cell_r){
+                    let reactive = document.getElementById(position+n*100+2000);
+                    reactive.innerHTML ="Q"+(n+1)+" = " + Math.floor(cell_r/1000) + " kVar" ;
+                    if((cell_r/1000)>200){
+                        reactive.className = "alert-danger";
+                    }else{
+                        reactive.className = "alert-success";
+                    }
+                }
+                if(cell_s){
+                    let cosphy = document.getElementById(position+n*100+3000);
+                    cosphy.innerHTML ="cos φ"+(n+1)+" = " + Math.abs(cell_a/cell_s).toFixed(1);
+                    if((cell_a/cell_s)<0.5){
+                        cosphy.className = "alert-danger";
+                    }else{
+                        cosphy.className = "alert-info";
+                    }
+                }
+                if(cell_uab){
+                    let uab = document.getElementById(position+n*100+4000);
+                    uab.innerHTML ="Uab"+(n+1)+" = " + Math.floor(cell_uab) + " V" ;
+                    if(cell_uab<=20000){
+                        uab.className = "alert-danger";
+                    }else{
+                        uab.className = "alert-success";
+                    }
+                }
+                if(cell_ubc){
+                    let ubc = document.getElementById(position+n*100+5000);
+                    ubc.innerHTML ="Ubc"+(n+1)+" = " + Math.floor(cell_ubc) + " V" ;
+                    if(cell_ubc<=20000){
+                        ubc.className = "alert-danger";
+                    }else{
+                        ubc.className = "alert-success";
+                    }
+                }
+                if(cell_uac){
+                    let uac = document.getElementById(position+n*100+6000);
+                    uac.innerHTML ="Uac"+(n+1)+" = " + Math.floor(cell_uac) + " V" ;
+                    if(cell_uac<=20000){
+                        uac.className = "alert-danger";
+                    }else{
+                        uac.className = "alert-success";
+                    }
+                }
             }
 
             function createTable(){
@@ -207,13 +215,60 @@
                         }
                     document.getElementById(i+1000).innerHTML = "No connection!";
                 }
+            } 
+
+            var Connected = false;
+            var hrabcells = [
+                ['12','13','14','7','8','6'],
+                ['32','33','34','27','28','26'],
+                ['52','53','54','47','48','46'],
+                ['72','73','74','67','68','66'],
+            ];
+            function fetchHrabrovo(url){
+                let ws = url;
+                if(!Connected){
+                    socket = new WebSocket(ws);
+                    socket.onopen = function() {
+                        socket.send('Request for data');
+                    };           
+                }else{
+                    socket.send('Request for data');
+                }
+
+                socket.onclose = function() {
+                    Connected = false;
+                }
+
+                socket.onmessage = function(s) {
+                    Connected = true;
+                    let data = JSON.parse(s.data);
+                    let position = windparks.length-1;
+                    //console.log(position);
+                    let powerrow = document.getElementById(position);
+                    let powername = document.getElementById(position+100);
+                    for(n=0;n<hrabcells.length;n++){
+                        let cell_a = data[hrabcells[n][0]].SampleValue//[SampleValue];
+                        let cell_r = data[hrabcells[n][1]].SampleValue;
+                        let cell_s = data[hrabcells[n][2]].SampleValue;
+                        let cell_uab = data[hrabcells[n][3]].SampleValue;
+                        let cell_ubc = data[hrabcells[n][4]].SampleValue;
+                        let cell_uac = data[hrabcells[n][5]].SampleValue;
+
+                        writeData(position,cell_a,cell_r, cell_s,cell_uab,cell_ubc,cell_uac);
+                        
+                    }
+                    powerrow.className = "table-success";    
+                    powername.className = "alert-success";
+                }
             }
 
             function getAllRTM(){
-                for(i=0;i<windparks.length;i++){
+                for(i=0;i<windparks.length-1;i++){
                     let url = windparks[i]["url"];
                     fetchData(url,i);
                 }
+                let hrabrovo = windparks[windparks.length-1]["url"];//'ws://212.5.144.3:8732'//windparks[windparks.length-1]["url"];
+                fetchHrabrovo(hrabrovo);
             } 
             createTable();
             getNames();
