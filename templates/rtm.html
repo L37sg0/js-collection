@@ -16,26 +16,106 @@
         </div>
         <script>
             windparks = [
-                {name:["Българево",],      url:'http://46.55.211.226:8732/ServiceDoWork/DoWork?_=1553674569477'},
-                {name:["Евклипс",],        url:'http://82.137.74.235:8732/ServiceDoWork/DoWork?_=1553674569477'},
-                {name:["Зевс Бонус",],     url:'http://84.43.190.175:8732/ServiceDoWork/DoWork?_=1553674569477'},
-                {name:["Милениум",],       url:'http://217.79.95.253:8732/ServiceDoWork/DoWork?_=1553674569477'},
-                {name:["Еко Енерджи",],    url:'http://46.252.51.133:8732/ServiceDoWork/DoWork?_=1553674569477'}, 
-                {name:["Микон1","Микон2","Микон3",],    url:'http://79.100.160.168:8732/ServiceDoWork/DoWork?_=1553689027886'}, 
-                {name:["ЛонгЕм",],         url:'http://79.100.161.99:8732/ServiceDoWork/DoWork?_=1553674569477'},
-                {name:["Хаос",],           url:'http://178.16.129.188:8732/ServiceDoWork/DoWork?_=1553674569477'},  
-                {name:["Видно",],          url:'http://46.55.214.50:8732/ServiceDoWork/DoWork?_=1553674569477'},
-                {name:["Сити Д", "Ник Билдинг",],    url:'http://46.55.211.169:8732/ServiceDoWork/DoWork?_=1553764022443'},  
-                {name:["БЗ Експорт",],     url:'http://46.55.211.26:8732/ServiceDoWork/DoWork?_=1553772770319'},
-                {name:["Цид Атлас",],      url:'http://46.55.240.17:8732/ServiceDoWork/DoWork?_=1553674569477'},  
-                {name:["Каварна Ийст Г5",],   url:'http://46.55.211.214:8737/ServiceDoWork/DoWork?_=1553764022443'},    
-                {name:["Арко",],           url:'http://46.55.211.156:8732/ServiceDoWork/DoWork?_=1553674569477'}, 
-                {name:["ЛонгМан Г1+Г2","ЛонгМан Г4","ЛонгМан Г3",],        url:'http://46.55.211.214:8736/ServiceDoWork/DoWork?_=1553764022443'},          
-                {name:["Вега KAV01+KAV02","Вега KAV03+KAV06","Вега KAV04+KAV05","Вега KAV07",],           url:'http://46.55.211.214:8733/ServiceDoWork/DoWork?_=1553764022443'},  
-                {name:["Каварна KAV08+KAV09","Каварна KAV10+KAV11",],      url:'http://46.55.211.214:8732/ServiceDoWork/DoWork?_=1553764022443'},       
-                {name:["Гимназия KAV12+KAV13","Гимназия KAV14+KAV15"],       url:'http://46.55.211.214:8734/ServiceDoWork/DoWork?_=1553764022443'},    
-                {name:["Божурец KAV16",],      url:'http://46.55.211.214:8735/ServiceDoWork/DoWork?_=1553764022443'},    
-                {name:["Храброво",],       url:'ws://212.5.144.3:8732'},
+                {
+                    name:["Българево",],
+                    url:'http://46.55.211.226:8732/ServiceDoWork/DoWork?_=1553674569477',
+                    status:'success'
+                },
+                {
+                    name:["Евклипс",],
+                    url:'http://82.137.74.235:8732/ServiceDoWork/DoWork?_=1553674569477',
+                    status:'success'
+                },
+                {
+                    name:["Зевс Бонус",],
+                    url:'http://84.43.190.175:8732/ServiceDoWork/DoWork?_=1553674569477',
+                    status:'success'
+                },
+                {
+                    name:["Милениум",],
+                    url:'http://217.79.95.253:8732/ServiceDoWork/DoWork?_=1553674569477',
+                    status:'success'
+                },
+                {
+                    name:["Еко Енерджи",],
+                    url:'http://46.252.51.133:8732/ServiceDoWork/DoWork?_=1553674569477',
+                    status:'info'
+                }, 
+                {
+                    name:["Микон1","Микон2","Микон3",],
+                    url:'http://79.100.160.168:8732/ServiceDoWork/DoWork?_=1553689027886',
+                    status:'success'
+                }, 
+                {
+                    name:["ЛонгЕм",],
+                    url:'http://79.100.161.99:8732/ServiceDoWork/DoWork?_=1553674569477',
+                    status:'success'
+                },
+                {
+                    name:["Хаос",],
+                    url:'http://178.16.129.188:8732/ServiceDoWork/DoWork?_=1553674569477',
+                    status:'success'
+                },  
+                {
+                    name:["Видно",],
+                    url:'http://46.55.214.50:8732/ServiceDoWork/DoWork?_=1553674569477',
+                    status:'success'
+                },
+                {
+                    name:["Сити Д", "Ник Билдинг",],
+                    url:'http://46.55.211.169:8732/ServiceDoWork/DoWork?_=1553764022443',
+                    status:'success'
+                },  
+                {
+                    name:["БЗ Експорт",],
+                    url:'http://46.55.211.26:8732/ServiceDoWork/DoWork?_=1553772770319',
+                    status:'success'
+                },
+                {
+                    name:["Цид Атлас",],
+                    url:'http://46.55.240.17:8732/ServiceDoWork/DoWork?_=1553674569477',
+                    status:'success'
+                },  
+                {
+                    name:["Каварна Ийст Г5",],
+                    url:'http://46.55.211.214:8737/ServiceDoWork/DoWork?_=1553764022443',
+                    status:'success'
+                },    
+                {
+                    name:["Арко",],
+                    url:'http://46.55.211.156:8732/ServiceDoWork/DoWork?_=1553674569477',
+                    status:'success'
+                }, 
+                {
+                    name:["ЛонгМан Г1+Г2","ЛонгМан Г4","ЛонгМан Г3",],
+                    url:'http://46.55.211.214:8736/ServiceDoWork/DoWork?_=1553764022443',
+                    status:'success'
+                },          
+                {
+                    name:["Вега KAV01+KAV02","Вега KAV03+KAV06","Вега KAV04+KAV05","Вега KAV07",],
+                    url:'http://46.55.211.214:8733/ServiceDoWork/DoWork?_=1553764022443',
+                    status:'success'
+                },  
+                {
+                    name:["Каварна KAV08+KAV09","Каварна KAV10+KAV11",],
+                    url:'http://46.55.211.214:8732/ServiceDoWork/DoWork?_=1553764022443',
+                    status:'success'
+                },       
+                {
+                    name:["Гимназия KAV12+KAV13","Гимназия KAV14+KAV15"],
+                    url:'http://46.55.211.214:8734/ServiceDoWork/DoWork?_=1553764022443',
+                    status:'success'
+                },    
+                {
+                    name:["Божурец KAV16",],
+                    url:'http://46.55.211.214:8735/ServiceDoWork/DoWork?_=1553764022443',
+                    status:'success'
+                },    
+                {
+                    name:["Храброво",],
+                    url:'ws://212.5.144.3:8732',
+                    status:'success'
+                },
             ]
             var datacells = [
                 ['12','13','14','6','7','8'],
@@ -43,8 +123,8 @@
                 ['92','93','94','86','87','88'],
                 ['132','133','134','126','127','128'],
             ]
-//Fetch the data for a question which the REST API provides
-            function fetchData(url,position){
+//Fetch the data from the url's REST API's
+            function fetchData(url,position, status){
                 // Fetch data from the url
                 fetch(url).then(response => {
                     if (!response.ok) {
@@ -66,8 +146,8 @@
                         writeData(position,cell_a,cell_r,cell_s,cell_uab,cell_ubc,cell_uac);
                         
                     }
-                    powerrow.className = "table-success";    
-                    powername.className = "alert-success";
+                    powerrow.className = "table-"+status;//success";    
+                    powername.className = "alert-"+status;//success";
                 }).catch(err => {
                     //console.log(err);
                     let powerrow = document.getElementById(position);
@@ -224,7 +304,7 @@
                 ['52','53','54','47','48','46'],
                 ['72','73','74','67','68','66'],
             ];
-            function fetchHrabrovo(url){
+            function fetchHrabrovo(url, status){
                 let ws = url;
                 if(!Connected){
                     socket = new WebSocket(ws);
@@ -257,18 +337,20 @@
                         writeData(position,cell_a,cell_r, cell_s,cell_uab,cell_ubc,cell_uac);
                         
                     }
-                    powerrow.className = "table-success";    
-                    powername.className = "alert-success";
+                    powerrow.className = "table-"+status;//success";    
+                    powername.className = "alert-"+status;//success";
                 }
             }
 
             function getAllRTM(){
                 for(i=0;i<windparks.length-1;i++){
                     let url = windparks[i]["url"];
-                    fetchData(url,i);
+                    let status = windparks[i]["status"];
+                    fetchData(url,i, status);
                 }
-                let hrabrovo = windparks[windparks.length-1]["url"];//'ws://212.5.144.3:8732'//windparks[windparks.length-1]["url"];
-                fetchHrabrovo(hrabrovo);
+                let hrabrovo = windparks[windparks.length-1]["url"];
+                let hrabrovo_status = windparks[windparks.length-1]["status"];//'ws://212.5.144.3:8732'//windparks[windparks.length-1]["url"];
+                fetchHrabrovo(hrabrovo, hrabrovo_status);
             } 
             createTable();
             getNames();
