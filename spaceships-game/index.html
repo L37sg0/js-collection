@@ -1,0 +1,188 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <meta name="viewport", content="width=device.width, initial.scale=1.0"/>
+    <title>SpaceShips</title>
+    <script src="js/phaser.min.js"></script>
+    <script src="js/vars.js"></script>
+    <script src="js/funcs.js"></script>
+    <script src="js/scenes.js"></script>
+    <script src="js/planets.js"></script>
+    <script src="js/ship.js"></script>
+    <script src="js/boss.js"></script>
+    <script src="js/aliens.js"></script>
+    <script src="js/gauges.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/powerups.js"></script>
+    <script src="js/menus/usermenu.js"></script>
+    <script src="js/menus/frame.js"></script>
+    <script src="js/menus/infomenu.js"></script>
+    <script src="js/menus/hangarmenu.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+        canvas{
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+    <script src="https://connect.facebook.net/en_US/fbinstant.6.0.js"></script>
+</head>
+<body>
+<script>
+//Loading of the FB sdk
+    window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '988441154665721',//Id of the game
+          xfbml      : true,
+          version    : 'v3.0'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    FBInstant.initializeAsync().then(function()
+    {
+        //game = new Phaser.Game(320, 480, Phaser.CANVAS, "SpaceShips",{preload: preload, create: create, update: update}); 
+    });
+
+    FBInstant.startGameAsync().then(function()
+    {
+        
+        contextType = FBInstant.context.getType();
+
+        
+        playerPic = FBInstant.player.getPhoto();
+        playerId = FBInstant.player.getID();
+
+        update();
+    });
+
+    //Starter for localhost testing:
+    game = new Phaser.Game(320, 480, Phaser.CANVAS, "SpaceShips2",{preload: preload, create: create, update: update}); 
+
+
+    function preload ()
+    {
+
+        //load phaser game basics
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.pageALignHorizontally = true;
+        game.scale.pageAlignVertically = true;
+        game.stage.backgroundColor = "#258";
+        col = game.world.width/40;
+        row = game.world.height/40/2;
+
+        //loading game audio
+        game.load.audio("boom", "audio/explosion.mp3");
+        game.load.audio("shoot", "audio/shoot.mp3");
+        game.load.audio("soundtrack", "audio/soundtrack.mp3");
+
+        //Loading animation for the game
+        for (var i=0; i < assets.length; i++)
+        {
+            //loading game images
+            game.load.image(assets[i].name, assets[i].src);  
+            var progress = ((i+1)/assets.length) * 100;
+            FBInstant.setLoadingProgress(progress);
+        }
+    }
+
+    function create ()
+    {
+        //create game soundtrack and sounds
+        boom = game.add.audio("boom");
+        shoot = game.add.audio("shoot");
+        soundtrack = game.add.audio("soundtrack");
+
+        //set volume of the sounds
+        boom.volume = 0.1;
+        shoot.volume = 0.1;
+        soundtrack.volume = 0.5;
+
+        //load sounds decode to play them every time on call
+        game.sound.setDecodedCallback([ boom, shoot, soundtrack ], update, this);
+        //play and loop soundtrack
+        soundtrack.play();
+        soundtrack.loopFull(1);
+
+        // create game physics
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+
+        //create game objects
+        //Background.initialize('background1');
+        Background.initialize('hangar');
+        Frame.open();
+        //UserMenu.open();  
+    }
+
+    function update ()
+    {        
+        //set tiling background speed
+        Background.update(backgroundSpeed);
+        // GameScene update
+        if(playing===11){
+            shipBody.x = game.input.x || game.world.width*0.5;
+            shipBody.y = game.input.y || game.world.height-80;
+            game.physics.arcade.collide(shipBody, aliens, alienHitShip, null, this);
+            game.physics.arcade.collide(shipBullets, aliens, bulletHitAlien, null, this);
+            game.physics.arcade.collide(shipBullets2, aliens, bulletHitAlien, null, this);
+            game.physics.arcade.collide(shipBullets3, aliens, bulletHitAlien, null, this);
+            game.physics.arcade.collide(shipBullets4, aliens, bulletHitAlien, null, this);
+            game.physics.arcade.collide(shipBullets5, aliens, bulletHitAlien, null, this);
+            game.physics.arcade.collide(shipBullets6, aliens, bulletHitAlien, null, this);
+            game.physics.arcade.collide(energyPower, shipBody, ShipGetBonus, null, this);
+            if(playerPlanetBody){
+                game.physics.arcade.collide(playerPlanetBody, aliens, alienHitPlanet, null, this);
+                game.physics.arcade.collide(bossBullets, playerPlanetBody, bulletHitPlayerPlanet, null, this);
+            }
+            if(alienPlanetBody){
+                game.physics.arcade.collide(shipBullets, alienPlanetBody, bulletHitAlienPlanet, null, this);
+                game.physics.arcade.collide(shipBullets2, alienPlanetBody, bulletHitAlienPlanet, null, this);
+                game.physics.arcade.collide(shipBullets3, alienPlanetBody, bulletHitAlienPlanet, null, this);
+                game.physics.arcade.collide(shipBullets4, alienPlanetBody, bulletHitAlienPlanet, null, this);
+                game.physics.arcade.collide(shipBullets5, alienPlanetBody, bulletHitAlienPlanet, null, this);
+                game.physics.arcade.collide(shipBullets6, alienPlanetBody, bulletHitAlienPlanet, null, this);
+            }
+            if(bossBody){
+                shipBody.body.immovable = false;
+                game.physics.arcade.collide(shipBody, bossBody, ShipHitBoss, null, this);
+                shipBody.body.immovable = true;
+                game.physics.arcade.collide(aliens, bossBody);
+                //game.physics.arcade.collide(aliens, aliens);
+                game.physics.arcade.collide(shipBullets, bossBody, bulletHitBoss, null, this);
+                game.physics.arcade.collide(shipBullets2, bossBody, bulletHitBoss, null, this);
+                game.physics.arcade.collide(shipBullets3, bossBody, bulletHitBoss, null, this);
+                game.physics.arcade.collide(shipBullets4, bossBody, bulletHitBoss, null, this);
+                game.physics.arcade.collide(shipBullets5, bossBody, bulletHitBoss, null, this);
+                game.physics.arcade.collide(shipBullets6, bossBody, bulletHitBoss, null, this);
+                game.physics.arcade.collide(bossBullets, shipBody, bulletHitShip, null, this);
+            }
+        } 
+
+        // Fight For Planet Scene update
+        /*if(playing===10){
+            shipBody.x = game.input.x || game.world.width*0.5;
+            shipBody.y = game.input.y || game.world.height-80;
+            
+            game.physics.arcade.collide(shipBullets, aliens, bulletHitAlien, null, this);
+            game.physics.arcade.collide(shipBullets, bossBody, bulletHitBoss, null, this);
+            game.physics.arcade.collide(shipBullets, alienPlanetBody, bulletHitAlienPlanet, null, this);
+            game.physics.arcade.collide(bossBullets, shipBody, bulletHitShip, null, this);
+            game.physics.arcade.collide(bossBullets, playerPlanetBody, bulletHitPlayerPlanet, null, this);
+        } */
+
+    }
+
+</script>
+
+</body>
+</html>
