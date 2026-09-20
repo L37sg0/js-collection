@@ -41,3 +41,4 @@ Make sure you have Node.js installed on your machine.
 ```bash
 node server.mjs
 ```
+- Open your web browser and navigate to: http://localhost:3000
