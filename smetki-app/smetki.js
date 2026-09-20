@@ -1,4 +1,6 @@
-
+document.getElementById("formIncome").addEventListener('submit', function(event){event.preventDefault();});
+document.getElementById("formCost").addEventListener('submit', function(event){event.preventDefault();});
+document.getElementById("formBills").addEventListener('submit', function(event){event.preventDefault();});
 function newIncome(element)
 {
     var table = document.getElementById(element);
