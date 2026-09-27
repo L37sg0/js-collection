@@ -1,47 +1,25 @@
 # JavaScript & Web Projects Collection
 
 A curated collection of legacy and modernized personal web applications, games, utilities, and portfolio sites built over the years using vanilla JavaScript, Python automation scripts, HTML5 Canvas, and the Phaser framework.
+
 ---
-## Repository Structure
 
-The repository is organized into independent, self-contained web projects, each served via a minimal native Node.js HTTP server:
+## Repository Structure & Projects
 
-```text
-js-collection/
-├── dicesGame/            # HTML5 Canvas implementation of the classic Craps dice game with sound effects
-├── l37sg0.github.io/     # Historical personal portfolio site featuring a Python-based CMS script
-├── questions-app/        # Interactive multi-category quiz game with trivia modules
-├── rtmviewer/            # Real-time IoT/SCADA monitoring dashboard for remote wind parks
-├── smetki-app/           # Personal finance manager calculating daily allowances and savings targets
-└── spaceships-game/      # Arcade-style space shooter built with Phaser and Facebook Instant Games SDK
-```
----
-## Projects Overview
+| Project Name | Description | Tech Stack | Quick Run Command |
+| --- | --- | --- | --- |
+| **`animations/`** | Declarative **SVG animation** samples demonstrating native SMIL animations, path morphing, timed sequences, and transformations. | HTML5, SVG (SMIL), Node.js | `node server.mjs` |
+| **`dicesGame/`** | A browser-based implementation of the classic dice game **Craps** featuring HTML5 Canvas rendering and sound effects. | HTML5 Canvas, Vanilla JS, CSS | `node server.mjs` |
+| **`FileUploader/`** | A modular jQuery plugin for multi-file drag-and-drop uploads with real-time progress tracking and dynamic file type icons. | jQuery, jQuery UI, HTML5 FormData | `npm install && npm run build && node server.mjs` |
+| **`FixedSidebar/`** | A lightweight jQuery script/plugin for responsive multi-section layouts featuring sticky positioning and smooth anchor scrolling. | jQuery, HTML5, CSS3 | `npm start` |
+| **`grids/`** | A lightweight CSS Grid layout experiment exploring named grid template areas (`header`, `main`, `sidebar`, `footer`). | HTML5, CSS3 Grid | `node server.mjs` |
+| **`InteractiveGoogleMap/`** | A logistics moving calculator integrating Google Maps API, geocoding, and distance matrix quote estimations. | Google Maps API, jQuery, jQuery UI | `npm start` |
+| **`questions-app/`** | A web-based quiz game spanning multiple knowledge categories equipped with live clocks and score tracking. | Vanilla JS, HTML5, CSS3 | `node server.mjs` |
+| **`rtmviewer/`** | A real-time monitoring dashboard tracking electrical telemetry and power parameters from remote wind parks (SCADA / RTM). | Bootstrap, Vanilla JS, WebSockets | `node server.mjs` |
+| **`SlidingPuzzle/`** | An interactive puzzle game where users slide image tiles across a grid to complete pictures, tracked via `localStorage`. | jQuery, jQuery UI, HTML5 | `npm start` |
+| **`smetki-app/`** | A personal finance and budget calculator distributing income across savings, daily allowances, and credit estimates. | Vanilla JS, HTML5, CSS3 | `node server.mjs` |
+| **`spaceships-game/`** | An arcade-style space shooter game with boss battles, ship upgrades, hangar menus, and Facebook Instant Games SDK mocks. | Phaser Engine, JavaScript, HTML5 | `node server.mjs` |
 
-- Dices Game (dicesGame/)
-    - Description: A browser-based implementation of the classic dice game Craps.
-    - Tech Stack: HTML5 Canvas, Vanilla JavaScript, CSS3.
-    - Features: Custom 3D-styled dice rendering, audio feedback for roll actions, and strict adherence to official craps rules (first throw outcomes and follow-up points).
-- Personal Portfolio (l37sg0.github.io/)
-    - Description: A historical personal website and blog platform.
-    - Tech Stack: HTML, CSS, JavaScript (AJAX/XHR), Python (Tkinter & HTTP server).
-    - Features: Built alongside a desktop companion tool (article-writer.py) used to generate JSON-backed articles and manage local media assets.
-- Questions App (questions-app/)
-    - Description: A lightweight educational quiz application.
-    - Tech Stack: Vanilla JavaScript, HTML5, CSS3.
-    - Features: Multiple distinct topic categories (Animals, Countries, Earth, Space, etc.), automated score evaluation, and integrated UI clocks.
-- RTMViewer (rtmviewer/)
-    - Description: An industrial SCADA-style monitoring dashboard tracking remote hardware metrics.
-    - Tech Stack: HTML5, Bootstrap 4, Vanilla JavaScript (Fetch API & WebSockets).
-    - Features: Real-time telemetry tracking for wind parks, displaying active/reactive power, power factor ($\cos \varphi$), phase voltages, and dynamic visual status alerts.
-- Smetki App (smetki-app/)
-    - Description: A personal finance and budget planning organizer.
-    - Tech Stack: Vanilla JavaScript, HTML5, CSS.
-    - Features: Dynamic addition of income sources and fixed costs, automated savings distribution, and daily budget calculations.
-- Spaceships Game (spaceships-game/)
-    - Description: A full-featured arcade space shooter.
-    - Tech Stack: Phaser Framework, JavaScript, HTML5.
-    - Features: Multi-level alien waves, boss battles, hangar ship upgrades, power-ups, and Facebook Instant Games SDK integration with local testing mocks.
 ---
 ## Local Development
 - All projects within this collection have been standardized to run on a minimal, zero-dependency native Node.js HTTP server (server.mjs) located in each project root.
