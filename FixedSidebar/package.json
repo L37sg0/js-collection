@@ -1,0 +1,14 @@
+{
+  "name": "file-uploader",
+  "version": "1.0.0",
+  "description": "jQuery file uploader widget with drag-and-drop and progress bars",
+  "main": "server.mjs",
+  "type": "module",
+  "scripts": {
+    "build": "npm install;node -e \"fs.mkdirSync('public/js/vendor', { recursive: true }); fs.copyFileSync('node_modules/jquery/dist/jquery.min.js', 'public/js/vendor/jquery.min.js'); console.log('Build complete: jQuery copied to public/js/vendor/');\"",
+    "start": "npm run build; node server.mjs"
+  },
+  "dependencies": {
+    "jquery": "^3.6.3"
+  }
+}
